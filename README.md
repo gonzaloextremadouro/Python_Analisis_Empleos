@@ -4,13 +4,15 @@ Bienvenidos a mi análisis del mercado laboral en el mundo de los datos. Este da
 
 Las columnas contienen detallada información sobre cada rol, salario, ubicaciones y skills esenciales. El dataset tiene como fuente al repositorio de [Luke Barousse](https://huggingface.co/datasets/lukebarousse/data_jobs) en [Hugging Face](https://huggingface.co), una plataforma que uso asiduamente para obtener información en la cual poder realizar análisis de datos.
 
-Para lograr los objetivos del proyecto, realizaré el análisis a través de unos scripts de Python.
+Para lograr los objetivos del proyecto, realizaré el análisis a través de unos scripts de Python. La obtención y visualización de la información de interés será usando este lenguaje y sus librerías.
 
-# Objetivos principales
-1. Entender el mercado laboral en el mundo de los datos
-2. Comprender qué skills son las más importantes para un analista de datos
-3. Obtener información salarial sobre trabajos en Argentina o de manera remota
-4. Obtener y visualizar toda la información de interés utilizando Python y sus librerías
+# Incógnitas a resolver
+1. ¿Ubicaciones de las búsquedas laborales de Analistas de Datos en Argentina?
+2. ¿Qué compañías lideran las búsquedas de Analistas de Datos en Argentina?
+3. ¿Cuántas de las búsquedas laborales en Argentina permiten el trabajo remoto? ¿Cuántas búsquedas laborales en Argentina mencionan el requerimiento de un título universitario?
+4. ¿Cuáles son las skills más requeridas en el mundo de los datos?
+5. ¿Cuál es la distribución salarial en los trabajos remotos?
+6. ¿Qué skills son las más requeridas y/o mejores pagas en los trabajos remotos?
 
 
 # Preparación y limpieza
@@ -40,7 +42,19 @@ df['job_skills'] = df['job_skills'].apply(lambda x: ast.literal_eval(x) if pd.no
 
 # Análisis
 
+Cada cuaderno Jupyter de este proyecto está dirigido a investigar aspectos específicos del mercado laboral de los datos.
+
 Como aspirante a analista de datos, focalicé sobre dos mercados laborales que me podrían ser de interés:
 
-1. Trabajos físicos en Argentina
-2. Trabajos de manera remota
+1. Trabajos en Argentina
+2. Trabajos de manera remota global
+
+# Trabajos en Argentina
+
+Creamos un DataFrame que contenga sólo los trabajos ubicados en Argentina.
+
+```python
+df_ARG = df[(df['job_country'] == 'Argentina')]
+```
+
+## 1. ¿Ubicaciones de las búsquedas laborales de Analistas de Datos?
