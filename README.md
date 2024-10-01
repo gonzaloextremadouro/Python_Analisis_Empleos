@@ -58,3 +58,7 @@ df_ARG = df[(df['job_country'] == 'Argentina')]
 ```
 
 ## 1. ¿Ubicaciones de las búsquedas laborales de Analistas de Datos?
+
+Para encontrar las ubicaciones más comunes en búsqueda de un analista de datos, agrupamos y ordenamos el df según la ubicación. Como resultado de esta consulta obtenemos las top 10 ubicaciones con avisos de empleo, que posteriormente visualizamos utilizando las librerías Matplotlib y Seaborn.
+
+Los pasos detallados de esta consulta se pueden observar en este cuaderno: [1_Análisis de ]
