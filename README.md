@@ -19,7 +19,7 @@ En esta sección describo los pasos esenciales para preparar los datos para el a
 
 ## Importación y limpieza de datos
 
-El primer paso es importar las librerías necesarias (con su respectivo alias) y cargar el dataset, junto a algunos pasos de limpieza para asegurar la calidad de los datos.
+El primer paso es importar cada una de las librerías necesarias (con su respectivo alias) y cargar el dataset, junto a algunos pasos de limpieza para asegurar la calidad de los datos.
 
 ```python
 # Importamos librerías
@@ -38,4 +38,9 @@ df['job_posted_date'] = pd.to_datetime(df['job_posted_date']) # Usamos una funci
 df['job_skills'] = df['job_skills'].apply(lambda x: ast.literal_eval(x) if pd.notna(x) else x) # Usamos un módulo de Python para transformar la columna de 'str' a 'list'
 ```
 
-n
+# Análisis
+
+Como aspirante a analista de datos, focalicé sobre dos mercados laborales que me podrían ser de interés:
+
+1. Trabajos físicos en Argentina
+2. Trabajos de manera remota
