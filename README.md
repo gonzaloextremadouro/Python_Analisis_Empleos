@@ -47,7 +47,7 @@ Cada cuaderno Jupyter de este proyecto está dirigido a investigar aspectos espe
 Como aspirante a analista de datos, focalicé sobre dos mercados laborales que me podrían ser de interés:
 
 1. Trabajos en Argentina
-2. Trabajos de manera remota global
+2. Trabajos de manera remota (global)
 
 # Trabajos en Argentina
 
@@ -85,7 +85,7 @@ plt.show()
 
 ### Observaciones:
 
-- Buenos Aires acapara casi la totalidad del mercado laboral en territorio argentino, siendo 21 veces más grande que la provincia de Córdoba, la segunda ubicación geográfica del gráfico.
+- Buenos Aires acapara casi la totalidad del mercado laboral en territorio argentino, siendo 21 veces más grande que el interior de la provincia de Córdoba, la segunda ubicación geográfica del gráfico.
 - El trabajo remoto parece una buena alternativa para los residentes del Interior del país, que de otra manera tienen un panorama desalentador con un número de búsquedas considerablemente minúsculo en comparación al área metropolitana.
 
 ## 2. ¿Qué compañías lideran las búsquedas de Analistas de Datos?
@@ -200,5 +200,127 @@ plt.show()
 *Gráfico de barras visualizando las top 5 skills en las búsquedas de los tres principales roles en el mundo de los datos en Argentina.*
 
 ### Observaciones:
-- SQL es la habilidad más requerida tanto para Analistas de Datos como para Ingeniero de Datos, alcanzando casi la mitad de los avisos en ambos roles.
-- Python es una habilidad cada vez más deseada, principalmente para Ingeniero de Datos y Científico de Datos, con más del 60% en estos casos.
+- SQL es la habilidad más requerida tanto para Analistas de Datos como para Ingeniero de Datos, alcanzando al menos el 49% de los avisos en ambos roles.
+- Python es una habilidad cada vez más deseada, principalmente para Ingeniero de Datos y Científico de Datos, con más del 60% en estos casos. Sin embargo es interesante como en el último tiempo ya se ha logrado posicionar como 2ª habilidad más requerida para Analista de Datos, con un 32%.
+- Para el rol de Ingeniero de Datos se requieren habilidades más técnicas y de programación como AWS, Azure o Spark, mientras que para los Analistas e Ingenieros de Datos se necesitan conocimientos en herramientas de manejo de datos (Excel) y visualización (Tableau / Power BI).
+
+# Trabajos Remotos
+
+## 5. ¿Cuál es la distribución salarial en los trabajos remotos?
+
+Para conseguir una idea de los salarios en los trabajos remotos, vamos a filtrar el df original para incluir sólamente los avisos que permitan esa condición de trabajo.
+
+La visualización de los datos será realizada en un diagrama de caja (o boxplot) que nos permitirá dar cuenta de todo el espectro salarial, incluyendo a la mediana, el rango, entre otros.
+
+Los pasos detallados de esta consulta se pueden observar en este cuaderno: [3_Análisis_de_Trabajos_Remotos](3_Análisis_de_Trabajos_Remotos.ipynb)
+
+```python
+# Creamos un df que sólo contenga los trabajos remotos y excluyendo salarios nulos
+df_homeoffice = df[df['job_work_from_home'] == True].dropna(subset='salary_year_avg')
+
+# Filtramos el df para obtener los mejores 6 trabajos
+job_titles = df_homeoffice['job_title_short'].value_counts().index[:6].tolist()
+df_homeoffice_top6 = df_homeoffice[df_homeoffice['job_title_short'].isin(job_titles)]
+```
+
+### Visualización de datos
+
+```python
+sns.boxplot(data=df_homeoffice_top6, x='salary_year_avg', y='job_title_short', order=job_order)
+sns.set_theme(style='ticks')
+sns.despine()
+
+plt.title('Distribución Salarial de Trabajos Remotos')
+plt.xlabel('Salario Anual (USD)')
+plt.ylabel('')
+plt.xlim(0, 600000)
+ticks_x = plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K')
+plt.gca().xaxis.set_major_formatter(ticks_x)
+plt.show()
+```
+
+### Resultados
+
+![Distribución Salarial de Trabajos Remotos](images\Distribución_Salarial_de_Trabajos_Remotos.png)
+
+*Diagrama de caja visualizando la distribución salarial en los principales 6 roles para trabajo remoto.*
+
+### Observaciones:
+- Los valores atípicos son más frecuentes en los puestos Sénior. Los puestos de Científico de Datos Sénior e Ingeniero de Datos Sénior muestran numerosos valores atípicos, especialmente en los tramos salariales más altos (por encima de $300K), lo que sugiere que los que se desempeñan en estos puestos pueden tener salarios significativamente más altos en comparación con la mayoría.
+- Los analistas de datos tienen el rango salarial más bajo. Este rol muestra un rango intercuartílico más pequeño y una mediana salarial más baja, lo que refuerza que este puesto suele ofrecer una remuneración más baja en comparación con los puestos de ingeniero y científico.
+- Los roles más avanzados y con más responsabilidades presentan una variabilidad en el rango mucho mayor al resto de los puestos, sugiriendo como el conocimiento de skills muy avanzadas o factores específicos como la experiencia influyen a la hora de determinar dicho salario abultado. En cambio, los salarios de los Analistas de Datos demuestran una consistencia en los valores y una media menos sesgada por valores atípicos.
+
+## 6. ¿Qué skills son las más requeridas y/o mejores pagas en los trabajos remotos?
+
+Por último, para obtener tanto las skills más requeridas como las mejores pagas vamos a crear un df para cada visualización, partiendo con el df de la consigna anterior como base.
+
+Los pasos detallados de esta consulta se pueden observar en este cuaderno: [3_Análisis_de_Trabajos_Remotos](3_Análisis_de_Trabajos_Remotos.ipynb)
+
+```python
+# Agrupamos los datos para obtener las 10 skills mejores pagas
+df_DA_top_pay = df_homeoffice.groupby('job_skills')['salary_year_avg'].agg(['count', 'median']).sort_values(by='median', ascending=False)
+
+df_DA_top_pay = df_DA_top_pay.head(10)
+
+# Agrupamos los datos para obtener las 10 skills más requeridas
+df_DA_skills = df_homeoffice.groupby('job_skills')['salary_year_avg'].agg(['count', 'median']).sort_values(by='count', ascending=False)
+
+df_DA_skills = df_DA_skills.head(10).sort_values(by='median', ascending=False)
+```
+
+### Visualización de datos
+
+```python
+fig, ax = plt.subplots(2, 1)
+
+# Top 10 skills mejores pagas
+sns.barplot(data=df_DA_top_pay, x='median', y=df_DA_top_pay.index, hue='median', ax=ax[0], palette='dark:b_r')
+ax[0].legend().remove()
+ax[0].set_title('Skills Mejores Pagas para Analistas de Datos en Trabajo Remoto')
+ax[0].set_ylabel('')
+ax[0].set_xlabel('')
+ax[0].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+
+# Top 10 skills más requeridas
+sns.barplot(data=df_DA_skills, x='median', y=df_DA_skills.index, hue='median', ax=ax[1], palette='light:b')
+ax[1].legend().remove()
+ax[1].set_title('Skills Más Requeridas para Analistas de Datos en Trabajo Remoto')
+ax[1].set_ylabel('')
+ax[1].set_xlabel('Mediana de Salario (USD)')
+ax[1].set_xlim(ax[0].get_xlim())
+ax[1].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+sns.set_theme(style='ticks')
+plt.tight_layout()
+plt.show()
+```
+
+### Resultados
+
+![Skills Mejores Pagas & Más Requeridas en Trabajo Remoto](images\Skills_Mejores_Pagas_&_Más_Requeridas_en_Trabajo_Remoto.png)
+
+*Diagrama de barras visualizando las top 10 skills mejores pagas y las top 10 skills más requeridas en Analistas de Datos.*
+
+### Observaciones:
+- Se observa un gran salario asociado a skills muy específicas, lo que podría indicar que capacitarse en esas herramientas puede llevar a un gran sueldo. No obstante, son muy poco requeridas por lo que sólo se podría usar en contextos muy específicos de empleos.
+- Las herramientas de uso más común de Microsoft (Excel, Word, Powerpoint) se encuentran en el rango de salarios más bajo, reflejando su menor valor frente a softwares más avanzados como Python, Power BI, o SAS.
+- A diferencia de los avisos en Argentina donde ocupaba el segundo lugar, Python ocupa el primer lugar reafirmando la versatilidad de esta herramienta y la tendencia creciente en su uso para el análisis de datos.
+
+# Conclusiones
+
+Este proyecto me dejó las siguientes conclusiones principales del mercado laboral:
+
+- **Salarios en trabajo remoto:** Los salarios fuera de los países desarrollados suelen ser menos competitivos que los que ofrece el trabajo remoto de dichos países. Esto sugiere que el trabajo a distancia, sobre todo en puestos sénior, es una alternativa muy viable para mejorar el potencial de ingresos. Los profesionales de países con niveles salariales más bajos deberían considerar la posibilidad de aprovechar los mercados globales para obtener mejor remuneración.
+- **Skills fundamentales:** Herramientas clave como Excel, SQL, Tableau y Power BI aparecen constantemente como habilidades fundamentales para los analistas de datos, lo que demuestra que dominarlas puede mejorar significativamente las perspectivas laborales. Con estas herramientas, un analista de datos puede cumplir los requisitos básicos de la mayoría de las funciones, lo que aumenta la probabilidad de ser una buena opción para una amplia gama de puestos.
+- **Python como habilidad importante:** La demanda de Python se ha disparado en los últimos años, convirtiéndolo en una herramienta esencial para el análisis de datos. La fuerte demanda de Python se refleja en su presencia en las ofertas de empleo y su correlación con salarios más altos. Los profesionales deben priorizar el aprendizaje y la actualización de Python para seguir siendo competitivos en un mercado en constante evolución como el del análisis de datos.
+- **Adaptación a las tendencias del mercado:** La industria de datos es muy dinámica, con demandas de habilidades cambiantes y herramientas emergentes. Los profesionales deben supervisar continuamente la evolución del panorama para mantenerse al día sobre qué habilidades son cada vez más relevantes y cuáles pueden ofrecer una ventaja competitiva en el futuro.
+
+# Aprendizajes
+
+A lo largo de este proyecto, no sólo entendí con más profundidad el mercado laboral para un analista de datos, si no que también pude usar por primera vez de manera extensiva mis habilidades en Python. Mis principales aprendizajes son los siguientes:
+
+- **La importancia de la limpieza de los datos:** Tener valores nulos o incorrectos implicó un buen tiempo considerando las soluciones para reflejar los datos de la manera más íntegra y fidedigna posible para llevar a cabo las consultas deseadas.
+- **Uso e importación de librerías para el análisis:** Aprendí la importancia y versatilidad de Pandas como una librería para analizar los datos de manera más sencilla y eficiente.
+- **Visualización de datos:** Debí desarrollar conocimientos en las librerías como Matplotlib o Seaborn que permiten personalizar las visualizaciones de gran manera y con mucho nivel de detalle, lo cual puede llevar a reiterados errores en el código si no se realiza perfectamente.
+- **Uso de nuevas herramientas:** Pude integrar Git y GitHub a la herramienta en la cual ejecuto los scripts (Visual Studio Code), para así asegurarme de poder compartir mi código y análisis. Lo más importante de Git es su control de versiones, que a mi entender es clave para poder realizar el seguimiento de los archivos de un proyecto.
