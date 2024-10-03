@@ -253,18 +253,6 @@ Por último, para obtener tanto las skills más requeridas como las mejores paga
 
 Los pasos detallados de esta consulta se pueden observar en este cuaderno: [3_Análisis_de_Trabajos_Remotos](3_Análisis_de_Trabajos_Remotos.ipynb)
 
-```python
-# Agrupamos los datos para obtener las 10 skills mejores pagas
-df_DA_top_pay = df_homeoffice.groupby('job_skills')['salary_year_avg'].agg(['count', 'median']).sort_values(by='median', ascending=False)
-
-df_DA_top_pay = df_DA_top_pay.head(10)
-
-# Agrupamos los datos para obtener las 10 skills más requeridas
-df_DA_skills = df_homeoffice.groupby('job_skills')['salary_year_avg'].agg(['count', 'median']).sort_values(by='count', ascending=False)
-
-df_DA_skills = df_DA_skills.head(10).sort_values(by='median', ascending=False)
-```
-
 ### Visualización de datos
 
 ```python
