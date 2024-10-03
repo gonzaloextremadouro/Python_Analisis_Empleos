@@ -1,10 +1,8 @@
 # Resumen
 
-Bienvenidos a mi análisis del mercado laboral en el mundo de los datos. Este dataset contiene cuantiosa información al respecto, con mi enfoque puesto en investigar las skills mejores pagas y/o más buscadas en los empleos, para poder encontrar las oportunidades de trabajo más óptimas en este caso para un analista de datos, que es el trabajo de interés de este proyecto.
+Bienvenidos a mi análisis del mercado laboral en el mundo de los datos. El objetivo de este proyecto es investigar las skills mejores pagas y/o más buscadas en los empleos, para poder encontrar las oportunidades de trabajo más óptimas y entender mejor este mercado laboral.
 
-Las columnas contienen detallada información sobre cada rol, salario, ubicaciones y skills esenciales. El dataset tiene como fuente al repositorio de [Luke Barousse](https://huggingface.co/datasets/lukebarousse/data_jobs) en [Hugging Face](https://huggingface.co), una plataforma que uso asiduamente para obtener información en la cual poder realizar análisis de datos.
-
-Para lograr los objetivos del proyecto, realizaré el análisis a través de unos scripts de Python. La obtención y visualización de la información de interés será usando este lenguaje y sus librerías.
+Las columnas contienen detallados datos sobre cada rol, salario, ubicaciones y skills esenciales. El dataset tiene como fuente al repositorio de [Luke Barousse](https://huggingface.co/datasets/lukebarousse/data_jobs) en [Hugging Face](https://huggingface.co), una plataforma que uso asiduamente para obtener información en la cual poder realizar análisis de datos.
 
 # Incógnitas a resolver
 1. ¿Ubicaciones de las búsquedas laborales de Analistas de Datos en Argentina?
@@ -12,7 +10,7 @@ Para lograr los objetivos del proyecto, realizaré el análisis a través de uno
 3. ¿Cuántas de las búsquedas laborales en Argentina permiten el trabajo remoto? ¿Cuántas búsquedas laborales en Argentina mencionan el requerimiento de un título universitario?
 4. ¿Cuáles son las skills más requeridas en el mundo de los datos?
 5. ¿Cuál es la distribución salarial en los trabajos remotos?
-6. ¿Qué skills son las más requeridas y/o mejores pagas en los trabajos remotos?
+6. ¿Qué skills son las más requeridas y mejores pagas en los trabajos remotos?
 
 
 # Preparación y limpieza
@@ -118,14 +116,13 @@ plt.show()
 ### Observaciones:
 
 - Empresas multinacionales de consultoría lideran las búsquedas, como Accenture o PwC. Estas se caracterizan por ofrecer diversos servicios en múltiples áreas por lo que es lógico que requieran más personal en el mundo de los datos.
-- Se destaca la importancia de un analista de datos en el rubro financiero, con búsquedas numerosas desde instituciones bancarias como BBVA hasta compañías de inversión como S&P o JPMorgan.
-- El único valor no perteneciente a uno de los otros grupos es IQVIA, una empresa perteneciente al rubro de la salud. Sin embargo, tiene sentido la necesidad de analista de datos, por ejemplo para optimizar la eficiencia operativa identificando tendencias e ineficiencias en los procesos sanitarios.
+- Se destaca también la importancia de un analista de datos en el rubro financiero, con búsquedas numerosas desde instituciones bancarias como BBVA hasta compañías de inversión como S&P o JPMorgan.
 
 ## 3. Trabajo Remoto & Mención de Título Universitario
 
-Con la información disponible, también es de mi interés saber qué empresas permiten el trabajo remoto y cuántas exigen un título universitario como indispensable.
+Con la información disponible, también es de mi interés saber qué empresas permiten el trabajo remoto y cuántas exigen un título universitario como requisito indispensable.
 
-Ambas columnas contienen los valores 'Verdadero' y 'Falso', es por eso que utilizamos Seaborn y Matplotlib personalizando la visualización para que refleje las etiquetas correspondiente en cada caso. En este caso, utilizamos una gráfica circular para cada uno.
+Para ambos casos la visualización que utilizaremos es una gráfica circular.
 
 Los pasos detallados de esta consulta se pueden observar en este cuaderno: [1_Análisis_de_Trabajos_en_Argentina](1_Análisis_de_Trabajos_en_Argentina.ipynb)
 
@@ -201,7 +198,7 @@ plt.show()
 
 ### Observaciones:
 - SQL es la habilidad más requerida tanto para Analistas de Datos como para Ingeniero de Datos, alcanzando al menos el 49% de los avisos en ambos roles.
-- Python es una habilidad cada vez más deseada, principalmente para Ingeniero de Datos y Científico de Datos, con más del 60% en estos casos. Sin embargo es interesante como en el último tiempo ya se ha logrado posicionar como 2ª habilidad más requerida para Analista de Datos, con un 32%.
+- Python es una habilidad cada vez más deseada, principalmente para Ingeniero de Datos y Científico de Datos, con más del 60% en estos casos. Resulta interesante como en el último tiempo ya se ha logrado posicionar como 2ª habilidad más requerida para Analista de Datos, con un 32%.
 - Para el rol de Ingeniero de Datos se requieren habilidades más técnicas y de programación como AWS, Azure o Spark, mientras que para los Analistas e Ingenieros de Datos se necesitan conocimientos en herramientas de manejo de datos (Excel) y visualización (Tableau / Power BI).
 
 # Trabajos Remotos
@@ -241,16 +238,16 @@ plt.show()
 
 ### Resultados
 
-![Distribución Salarial de Trabajos Remotos](images\Distribución_Salarial_de_Trabajos_Remotos.png)
+![Distribución Salarial de Trabajos Remotos](images/Distribución_Salarial_de_Trabajos_Remotos.png)
 
 *Diagrama de caja visualizando la distribución salarial en los principales 6 roles para trabajo remoto.*
 
 ### Observaciones:
 - Los valores atípicos son más frecuentes en los puestos Sénior. Los puestos de Científico de Datos Sénior e Ingeniero de Datos Sénior muestran numerosos valores atípicos, especialmente en los tramos salariales más altos (por encima de $300K), lo que sugiere que los que se desempeñan en estos puestos pueden tener salarios significativamente más altos en comparación con la mayoría.
 - Los analistas de datos tienen el rango salarial más bajo. Este rol muestra un rango intercuartílico más pequeño y una mediana salarial más baja, lo que refuerza que este puesto suele ofrecer una remuneración más baja en comparación con los puestos de ingeniero y científico.
-- Los roles más avanzados y con más responsabilidades presentan una variabilidad en el rango mucho mayor al resto de los puestos, sugiriendo como el conocimiento de skills muy avanzadas o factores específicos como la experiencia influyen a la hora de determinar dicho salario abultado. En cambio, los salarios de los Analistas de Datos demuestran una consistencia en los valores y una media menos sesgada por valores atípicos.
+- Los roles más avanzados y con más responsabilidades presentan una variabilidad en el rango mucho mayor al resto de los puestos, sugiriendo como el conocimiento de skills muy avanzadas o factores específicos como la experiencia influyen a la hora de determinar dicho salario abultado. En cambio, los salarios de los Analistas de Datos demuestran consistencia en los valores y una media menos sesgada por valores atípicos.
 
-## 6. ¿Qué skills son las más requeridas y/o mejores pagas en los trabajos remotos?
+## 6. ¿Qué skills son las más requeridas y mejores pagas en los trabajos remotos?
 
 Por último, para obtener tanto las skills más requeridas como las mejores pagas vamos a crear un df para cada visualización, partiendo con el df de la consigna anterior como base.
 
@@ -298,7 +295,7 @@ plt.show()
 
 ### Resultados
 
-![Skills Mejores Pagas & Más Requeridas en Trabajo Remoto](images\Skills_Mejores_Pagas_&_Más_Requeridas_en_Trabajo_Remoto.png)
+![Skills Mejores Pagas & Más Requeridas en Trabajo Remoto](images/Skills_Mejores_Pagas_&_Más_Requeridas_en_Trabajo_Remoto.png)
 
 *Diagrama de barras visualizando las top 10 skills mejores pagas y las top 10 skills más requeridas en Analistas de Datos.*
 
@@ -312,9 +309,9 @@ plt.show()
 Este proyecto me dejó las siguientes conclusiones principales del mercado laboral:
 
 - **Salarios en trabajo remoto:** Los salarios fuera de los países desarrollados suelen ser menos competitivos que los que ofrece el trabajo remoto de dichos países. Esto sugiere que el trabajo a distancia, sobre todo en puestos sénior, es una alternativa muy viable para mejorar el potencial de ingresos. Los profesionales de países con niveles salariales más bajos deberían considerar la posibilidad de aprovechar los mercados globales para obtener mejor remuneración.
-- **Skills fundamentales:** Herramientas clave como Excel, SQL, Tableau y Power BI aparecen constantemente como habilidades fundamentales para los analistas de datos, lo que demuestra que dominarlas puede mejorar significativamente las perspectivas laborales. Con estas herramientas, un analista de datos puede cumplir los requisitos básicos de la mayoría de las funciones, lo que aumenta la probabilidad de ser una buena opción para una amplia gama de puestos.
-- **Python como habilidad importante:** La demanda de Python se ha disparado en los últimos años, convirtiéndolo en una herramienta esencial para el análisis de datos. La fuerte demanda de Python se refleja en su presencia en las ofertas de empleo y su correlación con salarios más altos. Los profesionales deben priorizar el aprendizaje y la actualización de Python para seguir siendo competitivos en un mercado en constante evolución como el del análisis de datos.
-- **Adaptación a las tendencias del mercado:** La industria de datos es muy dinámica, con demandas de habilidades cambiantes y herramientas emergentes. Los profesionales deben supervisar continuamente la evolución del panorama para mantenerse al día sobre qué habilidades son cada vez más relevantes y cuáles pueden ofrecer una ventaja competitiva en el futuro.
+- **Skills fundamentales:** Herramientas clave como Excel, SQL, Tableau y Power BI aparecen constantemente como habilidades fundamentales para los analistas de datos. Con estas herramientas, un analista de datos puede cumplir los requisitos básicos de la mayoría de las funciones, lo que aumenta la probabilidad de ser una buena opción para una amplia gama de puestos.
+- **Python como habilidad importante:** La demanda de Python se ha disparado en los últimos años, convirtiéndolo en una herramienta esencial para el análisis de datos. La fuerte demanda se refleja en su presencia en las ofertas de empleo y su correlación con salarios más altos. Los profesionales deben priorizar el aprendizaje de Python para seguir siendo competitivos en un mercado en constante evolución como el del análisis de datos.
+- **Adaptación a las tendencias del mercado:** La industria de datos es muy dinámica, con demandas de habilidades cambiantes y herramientas emergentes. Es recomendable supervisar continuamente la evolución del panorama para mantenerse al día sobre qué habilidades son cada vez más relevantes y cuáles pueden ofrecer una ventaja competitiva en el futuro.
 
 # Aprendizajes
 
