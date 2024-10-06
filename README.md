@@ -12,14 +12,15 @@ Las columnas contienen detallados datos sobre cada rol, salario, ubicaciones y s
 5. ¿Cuál es la distribución salarial en los trabajos remotos?
 6. ¿Qué skills son las más requeridas y mejores pagas en los trabajos remotos?
 
-
 # Preparación y limpieza
 
-En esta sección describo los pasos esenciales para preparar los datos para el análisis, para lograr precisión y utilidad de los mismos.
+En esta sección describo los pasos esenciales de preparación de los datos a ser analizados, para lograr precisión y utilidad de los mismos.
 
 ## Importación y limpieza de datos
 
 El primer paso es importar cada una de las librerías necesarias (con su respectivo alias) y cargar el dataset, junto a algunos pasos de limpieza para asegurar la calidad de los datos.
+
+Una muestra del dataset puede ser observada en este cuaderno: [1_Análisis_de_Trabajos_en_Argentina](1_Análisis_de_Trabajos_en_Argentina.ipynb)
 
 ```python
 # Importamos librerías
