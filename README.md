@@ -2,7 +2,7 @@
 
 Bienvenidos a mi análisis del mercado laboral en el mundo de los datos. El objetivo de este proyecto es investigar las skills mejores pagas y/o más buscadas en los empleos, para poder encontrar las oportunidades de trabajo más óptimas y entender mejor este mercado laboral.
 
-Las columnas contienen detallados datos sobre cada rol, salario, ubicaciones y skills esenciales. El dataset tiene como fuente al repositorio de [Luke Barousse](https://huggingface.co/datasets/lukebarousse/data_jobs) en [Hugging Face](https://huggingface.co), una plataforma que uso asiduamente para obtener información en la cual poder realizar análisis de datos.
+Las columnas contienen detallados datos sobre cada rol, salario, ubicaciones y skills esenciales. El dataset puede ser encontrado en [Hugging Face](https://huggingface.co/datasets/lukebarousse/data_jobs), una plataforma que uso asiduamente como fuente para obtener información en la cual poder realizar análisis de datos.
 
 # Incógnitas a resolver
 1. ¿Ubicaciones de las búsquedas laborales de Analistas de Datos en Argentina?
